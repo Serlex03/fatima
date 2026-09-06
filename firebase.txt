@@ -1,0 +1,15 @@
+const firebaseConfig = {
+
+  apiKey: "AIzaSyC4r-lwyA8lUuN1blNr97lIf_8jI6wcCkY",
+
+  authDomain: "fatima-6247b.firebaseapp.com",
+
+  projectId: "fatima-6247b",
+
+  storageBucket: "fatima-6247b.firebasestorage.app",
+
+  messagingSenderId: "64107332049",
+
+  appId: "1:64107332049:web:1d173226346310703da0f0"
+
+};

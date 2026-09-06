@@ -1,0 +1,280 @@
+:root {
+    /* Paleta enriquecida */
+    --color-fondo-profundo: #2D0814;
+    --color-borgoña: #5E122A;
+    --color-crema: #FFF8F0;
+    --color-oro: #C4A16F;
+    --color-oro-claro: #E6D0AD;
+    --color-panel: #FDFBF7;
+    --color-panel-completado: #EFE7DB;
+    --color-texto-oscuro: #331C1F;
+    --color-lineas: #E8E2D9;
+    --fuente-titulos: 'Playfair Display', serif;
+    --fuente-texto: 'Lato', sans-serif;
+}
+
+body {
+    font-family: var(--fuente-texto);
+    background: linear-gradient(135deg, var(--color-fondo-profundo) 0%, var(--color-borgoña) 100%);
+    color: var(--color-crema);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    min-height: 100vh;
+}
+
+/* --- ESTILOS DE LA LANDING PAGE (index.html) --- */
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+    padding: 20px;
+}
+
+h1 {
+    font-family: var(--fuente-titulos);
+    color: var(--color-oro);
+    font-size: 2.8rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+.menu-principal {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 350px;
+}
+
+.btn-menu {
+    text-decoration: none;
+    color: var(--color-fondo-profundo);
+    background-color: var(--color-oro);
+    padding: 18px 20px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.btn-menu:hover {
+    background-color: var(--color-oro-claro);
+    transform: translateY(-2px);
+}
+
+.btn-menu.spotify {
+    background-color: #1DB954;
+    color: white;
+}
+
+/* --- ESTILOS DE LAS PÁGINAS INTERNAS --- */
+.nav-interna {
+    padding: 20px;
+    text-align: left;
+}
+
+.btn-volver {
+    color: var(--color-oro);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.seccion {
+    margin: 20px auto;
+    padding: 30px 20px;
+    width: 90%;
+    max-width: 700px;
+    background: var(--color-panel);
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.seccion h2 {
+    color: var(--color-borgoña);
+    font-family: var(--fuente-titulos);
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.subtitulo {
+    font-style: italic;
+    color: var(--color-texto-oscuro);
+    margin-bottom: 20px;
+}
+
+/* --- CONTADOR TIPO PLACA CONMEMORATIVA --- */
+.tiempo-caja {
+    font-family: var(--fuente-titulos);
+    font-size: 2.2rem;
+    color: var(--color-fondo-profundo); 
+    background: linear-gradient(135deg, var(--color-oro-claro) 0%, var(--color-oro) 100%);
+    padding: 40px 20px;
+    margin-top: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(196, 161, 111, 0.4);
+    font-weight: 600;
+    letter-spacing: 1px;
+    line-height: 1.4;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.3);
+}
+
+/* --- GALERÍA ESTILO COLLAGE (Sin recortes) --- */
+.galeria-grid {
+    column-count: 2; /* Divide la galería en 2 columnas */
+    column-gap: 15px; /* Espacio entre las columnas */
+    padding: 20px 0;
+}
+
+.galeria-grid img {
+    width: 100%;
+    height: auto; /* Mantiene las proporciones originales de tu foto */
+    margin-bottom: 15px; /* Espacio hacia abajo entre foto y foto */
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    border: 2px solid var(--color-oro-claro);
+    display: block; /* Evita espacios en blanco indeseados abajo de la imagen */
+    break-inside: avoid; /* Evita que una foto se parta a la mitad entre columnas */
+}
+
+/* --- SISTEMA DE PESTAÑAS (TABS) --- */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.tab-btn {
+    background: transparent;
+    border: 2px solid var(--color-oro);
+    color: var(--color-borgoña);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-family: var(--fuente-texto);
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tab-btn.activo {
+    background: var(--color-oro);
+    color: var(--color-fondo-profundo);
+}
+
+/* --- INPUTS Y LISTAS --- */
+.input-grupo {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.input-grupo input {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid var(--color-lineas);
+    border-radius: 8px;
+    font-family: var(--fuente-texto);
+    background-color: white;
+    color: var(--color-texto-oscuro);
+}
+
+.input-grupo input:focus {
+    outline: none;
+    border-color: var(--color-oro);
+}
+
+.input-grupo button {
+    padding: 15px 25px;
+    background-color: var(--color-borgoña);
+    color: var(--color-crema);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.input-grupo button:hover {
+    background-color: var(--color-fondo-profundo);
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+}
+
+ul li {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid var(--color-lineas);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-texto-oscuro);
+}
+
+.lista-completada li {
+    background: var(--color-panel-completado);
+    opacity: 0.8;
+}
+
+.acciones-item {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-accion {
+    background: transparent;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-check { color: #4CAF50; }
+.btn-editar { color: var(--color-oro); }
+.btn-borrar { color: var(--color-borgoña); }
+
+.btn-accion:hover {
+    transform: scale(1.2);
+}
+
+/* --- BOTONES DE WHATSAPP --- */
+.menu-whatsapp {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 30px; /* Separación hacia abajo */
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(232, 226, 217, 0.2); /* Línea divisoria abajo */
+}
+
+.btn-wa {
+    text-decoration: none;
+    color: white;
+    background-color: #25D366; /* Verde oficial de WhatsApp */
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+}
+
+.btn-wa:hover {
+    background-color: #128C7E;
+    transform: translateY(-2px);
+}

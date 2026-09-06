@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Películas - Nuestro Espacio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="nav-interna">
+        <a href="index.html" class="btn-volver">← Volver al Inicio</a>
+    </div>
+
+    <section class="seccion">
+        <h2>Peliculas y Series Vistas y Por Ver</h2>
+        
+        <!-- Sistema de Pestañas -->
+        <div class="tabs">
+            <button id="btn-tab-pendientes" class="tab-btn activo" onclick="cambiarTab('pendientes')">Por Ver</button>
+            <button id="btn-tab-completadas" class="tab-btn" onclick="cambiarTab('completadas')">Ya Vistas</button>
+        </div>
+
+        <!-- Input para agregar nuevas películas -->
+        <div class="input-grupo">
+            <input type="text" id="input-peli" placeholder="Añadir una película...">
+            <button onclick="agregarItem('peli')">Agregar</button>
+        </div>
+
+        <!-- Lista de Pendientes (Visible por defecto) -->
+        <div id="vista-pendientes">
+            <ul id="lista-pelis-pendientes"></ul>
+        </div>
+        
+        <!-- Lista de Ya Vistas (Oculta por defecto) -->
+        <div id="vista-completadas" style="display: none;">
+            <ul id="lista-pelis-completadas" class="lista-completada"></ul>
+        </div>
+    </section>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
