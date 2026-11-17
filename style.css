@@ -126,21 +126,103 @@ h1 {
 }
 
 /* --- GALERÍA ESTILO COLLAGE (Sin recortes) --- */
+.seccion-galeria {
+    max-width: 900px;
+    width: 92%;
+}
+
 .galeria-grid {
-    column-count: 2; /* Divide la galería en 2 columnas */
+    column-count: 2; /* 2 columnas en móviles */
     column-gap: 15px; /* Espacio entre las columnas */
-    padding: 20px 0;
+    padding: 15px 0;
+}
+
+@media (min-width: 768px) {
+    .galeria-grid {
+        column-count: 3; /* 3 columnas en pantallas medianas y grandes */
+        column-gap: 20px;
+    }
 }
 
 .galeria-grid img {
     width: 100%;
-    height: auto; /* Mantiene las proporciones originales de tu foto */
-    margin-bottom: 15px; /* Espacio hacia abajo entre foto y foto */
-    border-radius: 8px;
+    height: auto; /* Mantiene las proporciones originales de cada foto */
+    margin-bottom: 16px; /* Espacio hacia abajo entre foto y foto */
+    border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     border: 2px solid var(--color-oro-claro);
     display: block; /* Evita espacios en blanco indeseados abajo de la imagen */
     break-inside: avoid; /* Evita que una foto se parta a la mitad entre columnas */
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.galeria-grid img:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    border-color: var(--color-oro);
+}
+
+/* --- VISOR DE FOTOS EN PANTALLA COMPLETA (LIGHTBOX) --- */
+.modal-visor {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(45, 8, 20, 0.93);
+    backdrop-filter: blur(6px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.modal-visor.activo {
+    display: flex;
+}
+
+.modal-contenido {
+    max-width: 90vw;
+    max-height: 85vh;
+    border-radius: 12px;
+    border: 2px solid var(--color-oro);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    object-fit: contain;
+    animation: zoomIn 0.25s ease;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.cerrar-visor {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: var(--color-oro);
+    font-size: 2.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.cerrar-visor:hover {
+    color: var(--color-crema);
+    transform: scale(1.15);
 }
 
 /* --- SISTEMA DE PESTAÑAS (TABS) --- */

@@ -13,18 +13,37 @@
         <a href="index.html" class="btn-volver">← Volver al Inicio</a>
     </div>
 
-    <section id="galeria" class="seccion">
+    <section id="galeria" class="seccion seccion-galeria">
         <h2>Nuestros Recuerdos</h2>
         <p class="subtitulo">Nuestros mejores momentos capturados</p>
         
         <div class="galeria-grid">
-            <!-- Asegúrate de tener estas imágenes en tu carpeta 'img' -->
-            <img src="img/FA1.jpg" alt="Nosotros 1">
-            <img src="img/FA2.jpg" alt="Nosotros 2">
-            <img src="img/FA3.jpg" alt="Nosotros 3">
-            <img src="img/FA4.jpg" alt="Nosotros 4">
+            <img src="img/FA1.jpg" alt="Recuerdo 1" loading="lazy" onclick="abrirVisor(this.src)">
+            <img src="img/FA2.jpg" alt="Recuerdo 2" loading="lazy" onclick="abrirVisor(this.src)">
+            <img src="img/FA3.jpg" alt="Recuerdo 3" loading="lazy" onclick="abrirVisor(this.src)">
+            <img src="img/FA4.jpg" alt="Recuerdo 4" loading="lazy" onclick="abrirVisor(this.src)">
+            <img src="img/FA5.jpg" alt="Recuerdo 5" loading="lazy" onclick="abrirVisor(this.src)">
+            <img src="img/FA6.jpg" alt="Recuerdo 6" loading="lazy" onclick="abrirVisor(this.src)">
+            <img src="img/FA7.jpg" alt="Recuerdo 7" loading="lazy" onclick="abrirVisor(this.src)">
+            <img src="img/FA8.jpg" alt="Recuerdo 8" loading="lazy" onclick="abrirVisor(this.src)">
+            <img src="img/FA9.jpg" alt="Recuerdo 9" loading="lazy" onclick="abrirVisor(this.src)">
+            <img src="img/FA10.jpg" alt="Recuerdo 10" loading="lazy" onclick="abrirVisor(this.src)">
+            <img src="img/FA11.jpg" alt="Recuerdo 11" loading="lazy" onclick="abrirVisor(this.src)">
+            <img src="img/FA12.jpg" alt="Recuerdo 12" loading="lazy" onclick="abrirVisor(this.src)">
+            <img src="img/FA13.jpg" alt="Recuerdo 13" loading="lazy" onclick="abrirVisor(this.src)">
+            <img src="img/FA14.jpg" alt="Recuerdo 14" loading="lazy" onclick="abrirVisor(this.src)">
+            <img src="img/FA15.jpg" alt="Recuerdo 15" loading="lazy" onclick="abrirVisor(this.src)">
+            <img src="img/FA16.jpg" alt="Recuerdo 16" loading="lazy" onclick="abrirVisor(this.src)">
+            <img src="img/FA17.jpg" alt="Recuerdo 17" loading="lazy" onclick="abrirVisor(this.src)">
+            <img src="img/FA18.jpg" alt="Recuerdo 18" loading="lazy" onclick="abrirVisor(this.src)">
         </div>
     </section>
+
+    <!-- Visor de pantalla completa para ver fotos en grande -->
+    <div id="modal-visor" class="modal-visor" onclick="cerrarVisor()">
+        <span class="cerrar-visor" title="Cerrar">&times;</span>
+        <img id="img-ampliada" class="modal-contenido" src="" alt="Recuerdo ampliado">
+    </div>
 
     <script type="module" src="script.js"></script>
 </body>

@@ -214,3 +214,29 @@ document.addEventListener('DOMContentLoaded', () => {
         btnCasa.href = `whatsapp://send?phone=${numeroDestino}&text=${msjCasa}`;
     }
 });
+
+// --- 7. VISOR DE RECUERDOS (LIGHTBOX EN PANTALLA COMPLETA) ---
+window.abrirVisor = function(src) {
+    const modal = document.getElementById('modal-visor');
+    const img = document.getElementById('img-ampliada');
+    if (modal && img) {
+        img.src = src;
+        modal.classList.add('activo');
+        document.body.style.overflow = 'hidden'; // Evitar scroll de fondo mientras se ve la foto
+    }
+};
+
+window.cerrarVisor = function() {
+    const modal = document.getElementById('modal-visor');
+    if (modal) {
+        modal.classList.remove('activo');
+        document.body.style.overflow = '';
+    }
+};
+
+// Cerrar visor presionando Escape
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        window.cerrarVisor();
+    }
+});
