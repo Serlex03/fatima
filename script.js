@@ -1,20 +1,20 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, updateDoc, doc, serverTimestamp, query, orderBy } 
-from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, updateDoc, doc, serverTimestamp, query, orderBy }
+    from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyC4r-lwyA8lUuN1blNr97lIf_8jI6wcCkY",
+    apiKey: "AIzaSyC4r-lwyA8lUuN1blNr97lIf_8jI6wcCkY",
 
-  authDomain: "fatima-6247b.firebaseapp.com",
+    authDomain: "fatima-6247b.firebaseapp.com",
 
-  projectId: "fatima-6247b",
+    projectId: "fatima-6247b",
 
-  storageBucket: "fatima-6247b.firebasestorage.app",
+    storageBucket: "fatima-6247b.firebasestorage.app",
 
-  messagingSenderId: "64107332049",
+    messagingSenderId: "64107332049",
 
-  appId: "1:64107332049:web:1d173226346310703da0f0"
+    appId: "1:64107332049:web:1d173226346310703da0f0"
 
 };
 
@@ -22,11 +22,11 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // --- 1. LÓGICA DE PESTAÑAS (TABS) ---
-window.cambiarTab = function(estado) {
+window.cambiarTab = function (estado) {
     // Cambiar estilos de los botones
     document.getElementById('btn-tab-pendientes').classList.toggle('activo', estado === 'pendientes');
     document.getElementById('btn-tab-completadas').classList.toggle('activo', estado === 'completadas');
-    
+
     // Mostrar/Ocultar listas
     document.getElementById('vista-pendientes').style.display = estado === 'pendientes' ? 'block' : 'none';
     document.getElementById('vista-completadas').style.display = estado === 'completadas' ? 'block' : 'none';
@@ -34,9 +34,9 @@ window.cambiarTab = function(estado) {
 
 // --- 2. LÓGICA CRUD (Crear, Leer, Actualizar, Borrar) ---
 
-window.agregarItem = async function(tipo) {
+window.agregarItem = async function (tipo) {
     const inputId = tipo === 'peli' ? 'input-peli' : 'input-lugar';
-    const coleccion = tipo === 'peli' ? 'peliculas' : 'lugares'; 
+    const coleccion = tipo === 'peli' ? 'peliculas' : 'lugares';
     const input = document.getElementById(inputId);
     const valor = input.value.trim();
 
@@ -45,23 +45,23 @@ window.agregarItem = async function(tipo) {
             await addDoc(collection(db, coleccion), {
                 texto: valor,
                 estado: 'pendiente', // Nuevo campo
-                fecha: serverTimestamp() 
+                fecha: serverTimestamp()
             });
-            input.value = ""; 
+            input.value = "";
         } catch (e) {
             console.error("Error al agregar: ", e);
         }
     }
 }
 
-window.eliminarItem = async function(tipo, idDocumento) {
-    if(confirm("¿Seguro que quieres borrar esto?")) {
+window.eliminarItem = async function (tipo, idDocumento) {
+    if (confirm("¿Seguro que quieres borrar esto?")) {
         const coleccion = tipo === 'peli' ? 'peliculas' : 'lugares';
         await deleteDoc(doc(db, coleccion, idDocumento));
     }
 }
 
-window.editarItem = async function(tipo, idDocumento, textoActual) {
+window.editarItem = async function (tipo, idDocumento, textoActual) {
     const nuevoTexto = prompt("Edita el texto:", textoActual);
     if (nuevoTexto && nuevoTexto.trim() !== "" && nuevoTexto !== textoActual) {
         const coleccion = tipo === 'peli' ? 'peliculas' : 'lugares';
@@ -71,7 +71,7 @@ window.editarItem = async function(tipo, idDocumento, textoActual) {
     }
 }
 
-window.cambiarEstado = async function(tipo, idDocumento, estadoActual) {
+window.cambiarEstado = async function (tipo, idDocumento, estadoActual) {
     const coleccion = tipo === 'peli' ? 'peliculas' : 'lugares';
     const nuevoEstado = estadoActual === 'pendiente' ? 'completado' : 'pendiente';
     await updateDoc(doc(db, coleccion, idDocumento), {
@@ -82,32 +82,32 @@ window.cambiarEstado = async function(tipo, idDocumento, estadoActual) {
 // --- 3. ESCUCHAR CAMBIOS (REAL-TIME) ---
 function cargarListaRealtime(tipo) {
     const coleccion = tipo === 'peli' ? 'peliculas' : 'lugares';
-    
+
     const idPendientes = tipo === 'peli' ? 'lista-pelis-pendientes' : 'lista-lugares-pendientes';
     const idCompletadas = tipo === 'peli' ? 'lista-pelis-completadas' : 'lista-lugares-completadas';
-    
+
     const listaPendientes = document.getElementById(idPendientes);
     const listaCompletadas = document.getElementById(idCompletadas);
-    
+
     // Si la lista no existe en la página actual (ej. estamos en index.html), no hacemos nada
     if (!listaPendientes) return;
 
     const q = query(collection(db, coleccion), orderBy("fecha", "asc"));
 
     onSnapshot(q, (snapshot) => {
-        listaPendientes.innerHTML = ""; 
-        listaCompletadas.innerHTML = ""; 
+        listaPendientes.innerHTML = "";
+        listaCompletadas.innerHTML = "";
 
         snapshot.forEach((docSnap) => {
             const item = docSnap.data();
-            const id = docSnap.id; 
-            if(item.fecha === null) return; 
+            const id = docSnap.id;
+            if (item.fecha === null) return;
 
             // Si es un dato viejo que no tiene estado, lo tratamos como pendiente
-            const estado = item.estado || 'pendiente'; 
+            const estado = item.estado || 'pendiente';
 
             const li = document.createElement('li');
-            
+
             // Definimos el ícono del botón dependiendo del estado
             const iconoCheck = estado === 'pendiente' ? '✔' : '↺';
             const tituloCheck = estado === 'pendiente' ? 'Marcar como visto/hecho' : 'Regresar a pendientes';
@@ -150,7 +150,7 @@ if (cajaTiempo) {
         const años = Math.floor(diasTotales / 365);
         const meses = Math.floor((diasTotales % 365) / 30);
         const dias = (diasTotales % 365) % 30;
-        
+
         cajaTiempo.innerHTML = `${años} años, ${meses} meses y ${dias} días`;
     }
     setInterval(actualizarContador, 1000);
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputLugar = document.getElementById('input-lugar');
 
     if (inputPeli) {
-        inputPeli.addEventListener('keypress', function(evento) {
+        inputPeli.addEventListener('keypress', function (evento) {
             if (evento.key === 'Enter') {
                 evento.preventDefault();
                 agregarItem('peli');
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (inputLugar) {
-        inputLugar.addEventListener('keypress', function(evento) {
+        inputLugar.addEventListener('keypress', function (evento) {
             if (evento.key === 'Enter') {
                 evento.preventDefault();
                 agregarItem('lugar');
@@ -188,10 +188,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Solo se ejecuta si estamos en la página de inicio (donde están los botones)
     if (btnTeQuiero && btnCasa) {
-        
+
         // 1. PON SUS NÚMEROS AQUÍ (con código de país, ej: 52 para México)
-        const numeroSergio = "523335046533"; 
-        const numeroFatima = "523334892015"; 
+        const numeroSergio = "523335046533";
+        const numeroFatima = "523334892015";
 
         // 2. Leer la URL para ver de quién es el NFC
         const urlParams = new URLSearchParams(window.location.search);
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // 4. Armar los enlaces para WhatsApp
-        const msjTeQuiero = encodeURIComponent("Te quiero mucho ❤️");
+        const msjTeQuiero = encodeURIComponent("Te amo demasiado ❤️");
         const msjCasa = encodeURIComponent("Ya estoy en mi casa, mi vida 🏡");
 
         btnTeQuiero.href = `whatsapp://send?phone=${numeroDestino}&text=${msjTeQuiero}`;
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- 7. VISOR DE RECUERDOS (LIGHTBOX EN PANTALLA COMPLETA) ---
-window.abrirVisor = function(src) {
+window.abrirVisor = function (src) {
     const modal = document.getElementById('modal-visor');
     const img = document.getElementById('img-ampliada');
     if (modal && img) {
@@ -226,7 +226,7 @@ window.abrirVisor = function(src) {
     }
 };
 
-window.cerrarVisor = function() {
+window.cerrarVisor = function () {
     const modal = document.getElementById('modal-visor');
     if (modal) {
         modal.classList.remove('activo');
